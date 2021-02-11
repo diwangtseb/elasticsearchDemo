@@ -15,12 +15,12 @@ class SqliteDatabase(object):
                     SqliteDatabase._instance = super().__new__(cls)
         return SqliteDatabase._instance
 
-    def __init__(self, dbSource: str):
+    def __init__(self, dbsource: str):
         """
-        :type dbSource: str
+        :type dbsource: str
         """
         print(f"database connect successfully!")
-        self.conn = sqlite3.connect(dbSource, check_same_thread=False)
+        self.conn = sqlite3.connect(dbsource, check_same_thread=False)
         self.c = self.conn.cursor()
 
     def exec_sql(self, sql: str):
@@ -30,13 +30,13 @@ class SqliteDatabase(object):
 
     def select_sql(self, sql: str):
         """:param sql sqlite3 sql select"""
-        self.conn.row_factory = self.dictFactory
+        self.conn.row_factory = self.dict_factory
         self.c = self.conn.cursor()
         sql_res = self.c.execute(sql).fetchall()
         return sql_res
 
     @staticmethod
-    def dictFactory(cursor, row):
+    def dict_factory(cursor, row):
         """将sql查询结果整理成字典形式"""
         d = {}
         for index, col in enumerate(cursor.description):
