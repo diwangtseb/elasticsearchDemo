@@ -22,6 +22,7 @@ def homepage():
     return jsonify(res)
 
 
+# TODO because elasticsearch no run
 # @app.route('/search_sings')
 # def search_sings():
 #     # 获取request中的查询参数
